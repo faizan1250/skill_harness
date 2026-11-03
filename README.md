@@ -34,11 +34,11 @@ The system prompt makes the agent resolve its own role before it does any work, 
 
 | Turn | Who decides | What happens |
 |---|---|---|
-| 1 | Agent | Reads `C:/Users/bari2/Desktop/SKILLS/agent-orchestrator/skills.md` or `C:/Users/bari2/Desktop/SKILLS/agent-1to1/skills.md` |
-| 2 | Agent | Agent-B reads one `C:/Users/bari2/Desktop/SKILLS/<skill>/skills.md` — or none. Agent-A assigns that path to a subagent |
+| 1 | Agent | Reads `/home/faizan/SKILLS/agent-orchestrator/skills.md` or `/home/faizan/SKILLS/agent-1to1/skills.md` |
+| 2 | Agent | Agent-B reads one `/home/faizan/SKILLS/<skill>/skills.md` — or none. Agent-A assigns that path to a subagent |
 | 3 | You | Nothing. No command, no file path, no reminder |
 
-Routing is automatic. All skills live at `C:/Users/bari2/Desktop/SKILLS`, by explicit path, never by a loader.
+Routing is automatic. All skills live at `/home/faizan/SKILLS`, by explicit path, never by a loader.
 
 ## Domain skills
 
@@ -73,11 +73,11 @@ The canonical, universal `open-*` suite consists of 5 orchestrator-only skills t
 - **Phase 5 — PR Raise & Poll (`open-pre-pr`)**: Enforces pre-PR hard gates, builds standardized PR dispatches, and monitors CI and review bots (1.5 min interval, max 10 push updates, never merge).
 
 > [!IMPORTANT]
-> The `open-*` suite consists of private, orchestrator-only skills. They are loaded exclusively by Agent-A via explicit path (`C:/Users/bari2/Desktop/SKILLS/open-*/skills.md`). Agent-B is strictly forbidden from reading them, and Agent-A never delegates them to leaf subagents.
+> The `open-*` suite consists of private, orchestrator-only skills. They are loaded exclusively by Agent-A via explicit path (`/home/faizan/SKILLS/open-*/skills.md`). Agent-B is strictly forbidden from reading them, and Agent-A never delegates them to leaf subagents.
 
 ## Use it
 
-**Fastest path.** Open [`setup.md`](setup.md), copy the whole prompt block, paste it into your agent's chat. Done — the agent detects your harness, clones this repo, ensures paths resolve to `C:/Users/bari2/Desktop/SKILLS`, and appends the system prompt to your global instruction file. It then reports the clone path and the file it wrote; run the "Verify it worked" checks in `setup.md` to confirm.
+**Fastest path.** Open [`setup.md`](setup.md), copy the whole prompt block, paste it into your agent's chat. Done — the agent detects your harness, clones this repo, ensures paths resolve to `/home/faizan/SKILLS`, and appends the system prompt to your global instruction file. It then reports the clone path and the file it wrote; run the "Verify it worked" checks in `setup.md` to confirm.
 
 **Manual path**, if you'd rather do it yourself:
 
@@ -85,7 +85,7 @@ The canonical, universal `open-*` suite consists of 5 orchestrator-only skills t
 git clone https://github.com/kaiizer777/SKILLS.git ~/Desktop/SKILLS
 ```
 
-Use the same destination `setup.md` names. All skills live at `C:/Users/bari2/Desktop/SKILLS` — use this fully expanded path, never the `~` form: `~/Desktop/SKILLS` works as a shell argument and fails inside a file path. If `~/Desktop` does not exist, clone into a directory of your choosing and substitute that path instead.
+Use the same destination `setup.md` names. All skills live at `/home/faizan/SKILLS` — use this fully expanded path, never the `~` form: `~/Desktop/SKILLS` works as a shell argument and fails inside a file path. If `~/Desktop` does not exist, clone into a directory of your choosing and substitute that path instead.
 
 Then paste [`system-prompt.md`](system-prompt.md) into your harness's global instruction file:
 
@@ -104,17 +104,17 @@ Then paste [`system-prompt.md`](system-prompt.md) into your harness's global ins
 | `agent-orchestrator/skills.md` | Agent-A, when the agent has a dispatch tool |
 | `agent-1to1/skills.md` | Agent-B, when it does not |
 
-Nothing to wire up by hand — `system-prompt.md` already names both by path and resolves the role from the tools the agent has. The paths it refers to are `C:/Users/bari2/Desktop/SKILLS/agent-orchestrator/skills.md` and `C:/Users/bari2/Desktop/SKILLS/agent-1to1/skills.md`.
+Nothing to wire up by hand — `system-prompt.md` already names both by path and resolves the role from the tools the agent has. The paths it refers to are `/home/faizan/SKILLS/agent-orchestrator/skills.md` and `/home/faizan/SKILLS/agent-1to1/skills.md`.
 
 Most skill loaders want `SKILL.md`. Do not rename these files — the system prompt and both role skills reference `skills.md` by exact path, and each role skill states that only files named `skills.md` are loadable. For auto-discovery, add a `SKILL.md` that points at the existing `skills.md` instead of renaming it.
 
 ## `system-prompt.md`
 
-A single system prompt: role resolution, branch and commit rules, PR handling, verification discipline. All skill paths resolve directly to `C:/Users/bari2/Desktop/SKILLS`.
+A single system prompt: role resolution, branch and commit rules, PR handling, verification discipline. All skill paths resolve directly to `/home/faizan/SKILLS`.
 
 ## `setup.md`
 
-A copy-paste setup prompt. Paste it into your agent's chat and it detects your harness, clones this repo, ensures paths resolve to `C:/Users/bari2/Desktop/SKILLS`, appends the system prompt to the right instruction file, and reports back what it did. Verify the result yourself with the checks in `setup.md`.
+A copy-paste setup prompt. Paste it into your agent's chat and it detects your harness, clones this repo, ensures paths resolve to `/home/faizan/SKILLS`, appends the system prompt to the right instruction file, and reports back what it did. Verify the result yourself with the checks in `setup.md`.
 
 ## Conventions
 

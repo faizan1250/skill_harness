@@ -5,14 +5,14 @@
 **This skill is independent.** It contains the full standards, routes, and 5-phase pipeline. It does not require reading `agent-orchestrator/skills.md` to function — it only cross-links to the orchestrator core for inventory references.
 
 **Related skills:**
-- Parent / Core: `C:/Users/bari2/Desktop/SKILLS/agent-orchestrator/skills.md` — role, tool lockdown, skill inventory
-- Sibling: `C:/Users/bari2/Desktop/SKILLS/Personal-Proj/skills.md` — personal project pipeline (mutually exclusive)
+- Parent / Core: `/home/faizan/SKILLS/agent-orchestrator/skills.md` — role, tool lockdown, skill inventory
+- Sibling: `/home/faizan/SKILLS/Personal-Proj/skills.md` — personal project pipeline (mutually exclusive)
 - Orchestrator-only `open-*` skills referenced by the phases:
-  - `C:/Users/bari2/Desktop/SKILLS/open-issue-finding/skills.md` (Codebase Bug Hunting only — strictly isolated)
-  - `C:/Users/bari2/Desktop/SKILLS/open-issue-triage/skills.md` (Phase 1)
-  - `C:/Users/bari2/Desktop/SKILLS/open-pre-fix/skills.md` (Phase 2)
-  - `C:/Users/bari2\Desktop\SKILLS/open-post-fix/skills.md` (Phase 4)
-  - `C:/Users/bari2/Desktop/SKILLS/open-pre-pr/skills.md` (Phase 5)
+  - `/home/faizan/SKILLS/open-issue-finding/skills.md` (Codebase Bug Hunting only — strictly isolated)
+  - `/home/faizan/SKILLS/open-issue-triage/skills.md` (Phase 1)
+  - `/home/faizan/SKILLS/open-pre-fix/skills.md` (Phase 2)
+  - `/home/faizan/SKILLS/open-post-fix/skills.md` (Phase 4)
+  - `/home/faizan/SKILLS/open-pre-pr/skills.md` (Phase 5)
 
 ---
 
@@ -55,7 +55,7 @@ A subagent views a general skill **IF AND ONLY IF** the assigned task requires c
 - **Code Read/Write Work:** Tell the subagent to read **exactly one** matching general skill from the inventory. Never tell a subagent to read two skills, and never tell a subagent to read an orchestrator-only skill.
 - **Non-Code Work (NO SKILL VIEW):** If the subagent's task does NOT require reading or writing code files (for example: pure Git operations like branching/pushing/PR raising, polling CI/bots, web searching, conversational tasks, normal talk, or administrative checks), **NO skill view is needed or allowed**. Explicitly instruct the subagent not to view any skill. If a non-code task turns into a code fix — a bot or CI flagging a real defect that must be edited before it can be pushed — that is now a new code read/write task: dispatch a separate fixer subagent with the one matching general skill, and let the polling subagent stay read-only.
 
-Only files named `skills.md` are skills. Anything else under `C:/Users/bari2/Desktop/SKILLS` is not loadable.
+Only files named `skills.md` are skills. Anything else under `/home/faizan/SKILLS` is not loadable.
 
 ---
 
@@ -93,14 +93,14 @@ No parallel discovery scouts. The builder maps the surface itself.
 
 ### Phase 1 — Issue Sourcing & Triage
 
-Read `C:/Users/bari2/Desktop/SKILLS/open-issue-triage/skills.md` yourself.
+Read `/home/faizan/SKILLS/open-issue-triage/skills.md` yourself.
 - **Triage (`open-issue-triage`):** Ingest and systematically triage already-filed, open GitHub issues, filtering and scoring for high merge-ROI candidates.
 - **Strict Prohibition:** Never read or use `open-issue-finding` here. Finding new codebase bugs is a completely separate standalone workflow and is strictly forbidden during the fix pipeline.
 - **Issue Thread Discourse Ingestion:** Extract the complete architectural discourse from the GitHub issue thread: reporter's core friction, maintainer comments/labels (`type: Feature`, `enhancement`, `target: patch`), and community production insights (e.g. why naive fixes failed or opt-in defaults are needed).
 
 ### Phase 2 — Pre-Fix Investigation & Planning
 
-Read `C:/Users/bari2/Desktop/SKILLS/open-pre-fix/skills.md` yourself.
+Read `/home/faizan/SKILLS/open-pre-fix/skills.md` yourself.
 - Produce a Minimal Reproducible Example (MRE) with deterministic, verified failure isolation.
 - Isolate evidence-backed root cause and violated invariants.
 - **Inspect Repository Precedent:** Inspect recent merged PRs in the target repo to see how similar capability flags, adapters, or configurations were designed, typed, and merged.
@@ -109,7 +109,7 @@ Read `C:/Users/bari2/Desktop/SKILLS/open-pre-fix/skills.md` yourself.
 - **Architectural Purity (Zero Heuristic Shims):** Strictly forbid runtime sniffing or output-mapper coercions. Maintain clean abstraction boundaries; document storage migrations in JSDoc instead of hacking runtime transforms.
 - Map complete blast radius: callers, dependencies, downstream consumers, configurations, and regression test suites.
 - Establish architectural fix plan and partition work for 1, 2, or max 3 fixers with **strict disjoint file ownership**.
-- **Write comprehensive end-to-end pre-fix findings** into a markdown file at `C:/Users/bari2/Desktop/better-auth-dossier/issue-context/<issue-id>.md` (one folder per-session, one file per-issue) for the fixing agent, detailing the full problem statement, root cause analysis, reproduction, invariants, blast radius, upstream discourse, precedent citations, surgical fix blueprint, AND the verbatim Scope Contract with every diff line traced.
+- **Write comprehensive end-to-end pre-fix findings** into a markdown file at `/home/faizan/better-auth-dossier/issue-context/<issue-id>.md` (one folder per-session, one file per-issue) for the fixing agent, detailing the full problem statement, root cause analysis, reproduction, invariants, blast radius, upstream discourse, precedent citations, surgical fix blueprint, AND the verbatim Scope Contract with every diff line traced.
 - Package all findings into the **Phase 2 Context Packet** (referencing the dossier `.md` file). Do not advance to Phase 3 on partial context, missing MRE, or unmapped blast radius.
 - Use multiple parallel subagents for investigation and mapping. Parallel use is mandatory — time is never a constraint, rushing is a disqualifier, thoroughness wins.
 
@@ -119,7 +119,7 @@ Dispatch 1, 2, or max 3 parallel fixers according to issue size. Partition work 
 
 Fixers must enforce clean abstraction boundaries: zero speculative shims, zero runtime sniffing coercions, and honest conventional commit prefixes (`feat` vs `fix`).
 
-Every fixer prompt carries the **Phase 2 Context Packet** and references the comprehensive pre-fix findings `.md` file in `C:/Users/bari2/Desktop/better-auth-dossier/` so it does not rediscover anything. Note that `open-issue-fix` does NOT exist; fixers are subagents and read the matching general skill from the inventory:
+Every fixer prompt carries the **Phase 2 Context Packet** and references the comprehensive pre-fix findings `.md` file in `/home/faizan/better-auth-dossier/` so it does not rediscover anything. Note that `open-issue-fix` does NOT exist; fixers are subagents and read the matching general skill from the inventory:
 
 | The work is | Skill |
 | --- | --- |
@@ -144,7 +144,7 @@ You decide `ui-ux` vs `issue-fix` per situation. Name the reason in the dispatch
 
 ### Phase 4 — Post-Fix Multi-Lens Audit
 
-Read `C:/Users/bari2/Desktop/SKILLS/open-post-fix/skills.md` yourself.
+Read `/home/faizan/SKILLS/open-post-fix/skills.md` yourself.
 
 - **First Pass (Initial Full Audit):** Dispatch **7 parallel review subagents**, one for each lens (each reads `review` and is strictly **read-only**):
   - **Lens A: Security Audit** (vulnerabilities, input sanitization, auth boundaries, secrets, trust zones)
@@ -163,7 +163,7 @@ Read `C:/Users/bari2/Desktop/SKILLS/open-post-fix/skills.md` yourself.
 
 ### Phase 5 — PR Raise & Poll
 
-Read `C:/Users/bari2/Desktop/SKILLS/open-pre-pr/skills.md` yourself.
+Read `/home/faizan/SKILLS/open-pre-pr/skills.md` yourself.
 - Run pre-PR hard verification gates before drafting or opening a PR. Sequential multi-pass verification across distinct roles is required — forbid relying on a single unverified subagent.
 - Raise PR as **Draft** (`gh pr create --draft`) while running stabilization checks so maintainers never see an incomplete or iterating state.
 - Ensure PR title strictly adheres to conventional commit classification (`feat` vs `fix`) based on repo precedent and scope.
@@ -181,7 +181,7 @@ Read `C:/Users/bari2/Desktop/SKILLS/open-pre-pr/skills.md` yourself.
 - Enforce the **Review Bot Anti-Whac-A-Mole Rule**: if a review bot flags an edge case caused by an ad-hoc heuristic, strictly forbid "patching the patch" with another conditional; step back and eliminate the shim.
 - Mark PR as ready for review (`gh pr ready`) only when CI and review bots reach full green convergence.
 - Only entered after the Phase 4 gate is 100% clean.
-- **Cleanup after Phase 5:** Once the PR is raised and the convergence loop completes (or CI & review bots reach green convergence), **delete the pre-fix dossier `.md` file** in `C:/Users/bari2/Desktop/better-auth-dossier/` as its work is done.
+- **Cleanup after Phase 5:** Once the PR is raised and the convergence loop completes (or CI & review bots reach green convergence), **delete the pre-fix dossier `.md` file** in `/home/faizan/better-auth-dossier/` as its work is done.
 
 ---
 
@@ -189,7 +189,7 @@ Read `C:/Users/bari2/Desktop/SKILLS/open-pre-pr/skills.md` yourself.
 
 You never push, never raise a PR, never merge. You dispatch subagents to own verification and the PR loop.
 
-1. Read the pre-PR skill yourself — `C:/Users/bari2/Desktop/SKILLS/open-pre-pr/skills.md`. That skill holds the pipeline.
+1. Read the pre-PR skill yourself — `/home/faizan/SKILLS/open-pre-pr/skills.md`. That skill holds the pipeline.
 2. You cannot hand that skill to the subagent. **Write its relevant steps into the subagent's prompt yourself**, along with the loop rules below.
 3. **Sequential Multi-Pass Verification:** Run a dedicated verification subagent for pre-PR hard gates before opening the PR. Never rely on a single agent.
 4. **Draft PR by Default:** The subagent raises the PR as Draft (`gh pr create --draft`) to protect upstream maintainers from observing in-flight stabilization oscillations. The PR title must honestly reflect classification (`feat:` if adding public options/fields/capabilities, `fix:` only for bug fixes). The body must cite the full issue thread discourse and upstream design consensus.
@@ -199,7 +199,7 @@ You never push, never raise a PR, never merge. You dispatch subagents to own ver
 8. It pushes the fix and resumes polling. Hard cap: **10 push-updates.** After the 10th it stops and reports to the user what is still red. No infinite loops, no force-pushing.
 9. Done means **CI fully green** and review bots effectively green. Only then mark the PR as ready (`gh pr ready <pr-number>`).
 10. **Never merge — not you, not the subagent.** Leave the PR for the project owner to review and merge.
-11. **Dossier cleanup:** After the PR is raised and the poll loop finishes, delete the pre-fix findings `.md` file in `C:/Users/bari2/Desktop/better-auth-dossier/` since its work is done.
+11. **Dossier cleanup:** After the PR is raised and the poll loop finishes, delete the pre-fix findings `.md` file in `/home/faizan/better-auth-dossier/` since its work is done.
 
 ---
 
@@ -257,7 +257,7 @@ If two branches are ever going to be live at once, they belong in separate workt
 - Never open a non-draft PR while CI/review-bot stabilization checks are still iterating — use `gh pr create --draft`.
 - Never implement anything yourself.
 - Never let a subagent `git stash`, switch branches, or touch files outside its ownership boundary.
-- Never leave the pre-fix findings `.md` file in `C:/Users/bari2/Desktop/better-auth-dossier/` undeleted after Phase 5 is finished.
+- Never leave the pre-fix findings `.md` file in `/home/faizan/better-auth-dossier/` undeleted after Phase 5 is finished.
 - Never let a fixer invent new public options, fields, methods, or exported types the issue did not request. 101% scope alignment or it does not ship.
 - Never let a fixer touch core schema (DB tables, migration files, exported type definitions, public serialization shapes, stable API contracts) without explicit Scope Contract or maintainer authorization.
 - Never let a fixer bundle an unrelated refactor, formatting sweep, opportunistic cleanup, or dependency bump into a scoped fix — split into its own issue.

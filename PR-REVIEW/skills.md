@@ -23,16 +23,16 @@ This exists to replace paid PR-review bots (Greptile/CodeRabbit/Cubic-class tool
    ```
 3. Create the dossier directory:
    ```
-   C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\
+   /home/faizan/dossier/<repo-name>/PR-<number>/
    ```
-   **CRITICAL STORAGE ENFORCEMENT**: ALL files created throughout this workflow (metadata, phase-1 context, per-file reviews, auto-fix scripts, review payload JSON, and final verdicts) MUST strictly live in `C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\`. Under NO circumstances should any file be created or placed in the repository root, current working directory, workspace root, or anywhere outside this directory. Always pass this exact absolute path as `{DOSSIER_DIR}` to every subagent.
+   **CRITICAL STORAGE ENFORCEMENT**: ALL files created throughout this workflow (metadata, phase-1 context, per-file reviews, auto-fix scripts, review payload JSON, and final verdicts) MUST strictly live in `/home/faizan/dossier/<repo-name>/PR-<number>/`. Under NO circumstances should any file be created or placed in the repository root, current working directory, workspace root, or anywhere outside this directory. Always pass this exact absolute path as `{DOSSIER_DIR}` to every subagent.
    If it already exists from a prior run, ask the user whether to overwrite or abort — do not silently clobber a previous review.
 4. Get the file-by-file diff stats to plan Phase 2 partitioning:
    ```
    gh pr view <PR> --json files -q '.files[] | {path, additions, deletions}'
    ```
    For each file, total changed lines = additions + deletions. This determines chunking (see Step 2). Note: `gh pr view --json files` lists every changed file including renames, binaries, and deletions — before partitioning, drop binary files (no textual diff to review) and files matching common generated/vendored patterns (lockfiles like `package-lock.json`/`yarn.lock`/`Cargo.lock`, `dist/`, `build/`, `vendor/`, `node_modules/`, `*.min.js`) unless the user says otherwise. Record which files were excluded and why in `meta.json` so it's visible in the final report, not silently dropped.
-5. Save this metadata to `{DOSSIER_DIR}/meta.json` (`C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\meta.json`) — every subagent will need the head SHA for posting, and you'll need the file list for partitioning. Include `head_sha` plus `last_reviewed_sha` (initially null) and `posted_comment_ids` (initially empty array) fields so re-review mode can reuse them later.
+5. Save this metadata to `{DOSSIER_DIR}/meta.json` (`/home/faizan/dossier/<repo-name>/PR-<number>/meta.json`) — every subagent will need the head SHA for posting, and you'll need the file list for partitioning. Include `head_sha` plus `last_reviewed_sha` (initially null) and `posted_comment_ids` (initially empty array) fields so re-review mode can reuse them later.
 
 Do not proceed to Phase 1 until the dossier directory and meta.json exist.
 
@@ -80,11 +80,11 @@ Using the file list + line counts from `meta.json`:
 
 Dispatch **all N subagents in a single message** (parallel). Use the **Phase 2 prompt** below for every one, filling in:
 - Its assigned file path (and line range, if chunked)
-- The dossier path for its output file (`{DOSSIER_DIR}/phase-2{letter}.md`, strictly in `C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\`)
+- The dossier path for its output file (`{DOSSIER_DIR}/phase-2{letter}.md`, strictly in `/home/faizan/dossier/<repo-name>/PR-<number>/`)
 - The dossier path for both Phase 1 files (so it can read full PR context first)
 
 **Hard Requirements for Phase 2 subagents:**
-1. **Strict File Location**: All output files MUST strictly live in `C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\`.
+1. **Strict File Location**: All output files MUST strictly live in `/home/faizan/dossier/<repo-name>/PR-<number>/`.
 2. **Issue Format**: Every finding must strictly begin with `## [RISK_TIER] 7-10 words short conclusion of issue` at the very top, followed directly below by the issue description in short, concise, and on-point language (not bloated, no fluff).
 3. **Mandatory Auto-Fix & Scope Discipline**: For every issue raised, the subagent MUST write an auto-fix script and replacement code. Crucially, distinguish between **independent** (single-file only) vs **multi-file** fixes. If an issue requires changes across multiple files to fix properly, strictly flag it as multi-file so downstream phases do not attach a broken 1-click suggestion.
 
@@ -163,7 +163,7 @@ Trigger: a new commit is pushed to an already-reviewed PR, or the user asks for 
 Copy the relevant template below verbatim into the `Agent` tool's prompt when dispatching each subagent, filling in the `{PLACEHOLDER}` values first.
 
 > **CRITICAL DOSSIER DIRECTORY ENFORCEMENT**:
-> In all prompts below, `{DOSSIER_DIR}` is strictly `C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\`.
+> In all prompts below, `{DOSSIER_DIR}` is strictly `/home/faizan/dossier/<repo-name>/PR-<number>/`.
 > Every subagent is strictly forbidden from writing files anywhere else (such as the repository directory or cwd). All outputs, intermediate notes, auto-fix scripts, payloads, and final reports must strictly live inside `{DOSSIER_DIR}`.
 
 ## Phase 1A Prompt — Diff/Structural Context Subagent
@@ -394,7 +394,7 @@ Fill in: `{PR_NUMBER}`, `{REPO}`, `{DOSSIER_DIR}`, `{FILE_PATH}`, `{LINE_RANGE}`
 ```
 You are a deep-review subagent in an automated PR review pipeline. You have been assigned exactly one file (or one chunk of one large file) to review. This is your entire job for this task — do not look at any other file in the PR. You do not have posting authority: never run `gh api`, `gh pr comment`, `gh pr review`, or any command that writes to GitHub. Your only output is the markdown file described below.
 
-**Strict Storage Rule**: All files made in this workflow must strictly live in `{DOSSIER_DIR}` (`C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\`). Never write files to the repo root, workspace, or current working directory.
+**Strict Storage Rule**: All files made in this workflow must strictly live in `{DOSSIER_DIR}` (`/home/faizan/dossier/<repo-name>/PR-<number>/`). Never write files to the repo root, workspace, or current working directory.
 
 Why you can go deep: your scope is small by design. You own at most ~550 lines of diff. A generic PR-review bot has to spread its attention across an entire PR in one pass; you don't. There is no excuse for a shallow pass here. Read every changed line. Understand what it does, why it might be wrong, and what the correct version would look like, before moving to the next line. Take as much time as the review genuinely requires — there is no reward for finishing fast and every reward for finding real issues a rushed reviewer would miss.
 
@@ -760,7 +760,7 @@ Notes:
 - Do NOT include any collapsible auto-fix script tags or shell scripts in the comment.
 - The first example above is a multi-line finding (lines 123-131); the second is single-line (line 42 only) — omit start_line/start_side entirely for single-line comments.
 - Use event: "COMMENT" — never REQUEST_CHANGES or APPROVE; this pipeline reports findings, it doesn't gate merges on the author's behalf.
-- Write this JSON strictly to `{DOSSIER_DIR}/review-payload.json` (inside `C:\Users\bari2\Desktop\dossier\<repo-name>\PR-<number>\`) rather than inlining on the command line.
+- Write this JSON strictly to `{DOSSIER_DIR}/review-payload.json` (inside `/home/faizan/dossier/<repo-name>/PR-<number>/`) rather than inlining on the command line.
 
 Post with:
 gh api --method POST \
