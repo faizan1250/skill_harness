@@ -429,7 +429,7 @@ Once Stage 5 reports green:
   * Bot review convergence summary
   * Ready for maintainer review
 - Leave the PR in open status for the project maintainer.
-- **Delete the pre-fix findings `.md` file in `C:/Users/bari2/Desktop/better-auth-dossier/`** as its work is done.
+- **Delete the pre-fix findings `.md` file in `/home/faizan/better-auth-dossier/`** as its work is done.
 
 ---
 

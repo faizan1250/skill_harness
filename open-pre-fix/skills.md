@@ -38,7 +38,7 @@ Stage 2 (all parallel, one dispatch message) ───────────�
 
 ### 0.2 Persistent PreFixDossier
 
-Dossier root: `C:/Users/bari2/Desktop/better-auth-dossier/issue-context/<issue-id>/`
+Dossier root: `/home/faizan/better-auth-dossier/issue-context/<issue-id>/`
 
 ```
 <issue-id>/
@@ -229,7 +229,7 @@ Dispatch one **Synthesis Agent** (uses Synthesis Prompt below). It reads all Sta
 
 ## SECTION 1 — Subagent Prompt Templates
 
-Fill all `{PLACEHOLDER}` values before dispatching. Pass the exact dossier directory path as `{DOSSIER_DIR}` = `C:/Users/bari2/Desktop/better-auth-dossier/issue-context/{ISSUE_ID}/`.
+Fill all `{PLACEHOLDER}` values before dispatching. Pass the exact dossier directory path as `{DOSSIER_DIR}` = `/home/faizan/better-auth-dossier/issue-context/{ISSUE_ID}/`.
 
 ---
 

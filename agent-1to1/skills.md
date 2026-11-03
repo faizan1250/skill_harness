@@ -4,7 +4,7 @@
 
 Role: you own one task end-to-end. You cannot delegate, spawn, or dispatch other agents. Read this file once, on your first message, before any work.
 
-All skills live at `C:/Users/bari2/Desktop/SKILLS`. Never hand back an unresolved path to the user.
+All skills live at `/home/faizan/SKILLS`. Never hand back an unresolved path to the user.
 
 ## Skill Access — STRICT
 
@@ -12,11 +12,11 @@ Every task either requires exactly one general skill, or none. Which one is your
 
 | Skill | Path | Read when |
 | --- | --- | --- |
-| frontend | `C:/Users/bari2/Desktop/SKILLS/frontend/skills.md` | New frontend feature or component work |
-| backend | `C:/Users/bari2/Desktop/SKILLS/backend/skills.md` | New backend, API, or server-side feature |
-| ui-ux | `C:/Users/bari2/Desktop/SKILLS/ui-ux/skills.md` | Existing frontend being changed — UI/UX enhancement, visual bug, or any work on a shipped surface |
-| issue-fix | `C:/Users/bari2/Desktop/SKILLS/issue-fix/skills.md` | Existing frontend non-UI/UX work, existing backend work, or any bug/issue fix |
-| review | `C:/Users/bari2/Desktop/SKILLS/review/skills.md` | Reviewing a diff, PR, or existing code |
+| frontend | `/home/faizan/SKILLS/frontend/skills.md` | New frontend feature or component work |
+| backend | `/home/faizan/SKILLS/backend/skills.md` | New backend, API, or server-side feature |
+| ui-ux | `/home/faizan/SKILLS/ui-ux/skills.md` | Existing frontend being changed — UI/UX enhancement, visual bug, or any work on a shipped surface |
+| issue-fix | `/home/faizan/SKILLS/issue-fix/skills.md` | Existing frontend non-UI/UX work, existing backend work, or any bug/issue fix |
+| review | `/home/faizan/SKILLS/review/skills.md` | Reviewing a diff, PR, or existing code |
 
 Rules:
 - **Required → mandatory.** When a skill applies, you read it in full before the first edit. No partial read, no skimming, no "I already know this pattern." No skill, no edit. There is no such thing as being too late to read, only too late to have read it.
@@ -27,7 +27,7 @@ Rules:
 - Existing frontend splits by nature: visible UI, styling, layout, or interaction → `ui-ux`. Pure logic, data, or API on an existing surface → `issue-fix`.
 - Forbidden: every `open-*` skill (`open-issue-finding`, `open-issue-triage`, `open-pre-fix`, `open-post-fix`, `open-pre-pr`). Those belong to the orchestrator. Reading one is a hard violation. They are private and will not exist in a public clone; the rule still applies if they are ever present.
 - Never read a skill the task does not call for, even to "check something quickly".
-- Only files named `skills.md` are skills. Anything else under `C:/Users/bari2/Desktop/SKILLS` is not loadable.
+- Only files named `skills.md` are skills. Anything else under `/home/faizan/SKILLS` is not loadable.
 
 ## Rules
 

@@ -27,11 +27,11 @@ Orch agent are prohibited to read these skills , these are for subagents only.
 
 | Skill | Path | Assign in |
 | --- | --- | --- |
-| frontend | `C:/Users/bari2/Desktop/SKILLS/frontend/skills.md` | Phase 2, new frontend surface |
-| backend | `C:/Users/bari2/Desktop/SKILLS/backend/skills.md` | Phase 2, new backend/API surface |
-| ui-ux | `C:/Users/bari2/Desktop/SKILLS/ui-ux/skills.md` | Phase 3, feature touches an existing shipped surface |
-| issue-fix | `C:/Users/bari2/Desktop/SKILLS/issue-fix/skills.md` | Phase 3, feature build surfaces a bug in existing code that must be fixed in-line |
-| review | `C:/Users/bari2/Desktop/SKILLS/review/skills.md` | Phase 3, every reviewer lens dispatch |
+| frontend | `/home/faizan/SKILLS/frontend/skills.md` | Phase 2, new frontend surface |
+| backend | `/home/faizan/SKILLS/backend/skills.md` | Phase 2, new backend/API surface |
+| ui-ux | `/home/faizan/SKILLS/ui-ux/skills.md` | Phase 3, feature touches an existing shipped surface |
+| issue-fix | `/home/faizan/SKILLS/issue-fix/skills.md` | Phase 3, feature build surfaces a bug in existing code that must be fixed in-line |
+| review | `/home/faizan/SKILLS/review/skills.md` | Phase 3, every reviewer lens dispatch |
 
 As with the orchestrator core: you choose the path, you pass it to the subagent, you never read the general skill's body yourself.
 

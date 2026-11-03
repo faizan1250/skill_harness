@@ -29,10 +29,10 @@ This pipeline is intentionally narrower than the full PR-REVIEW skill. Every sub
    ```
 3. Create the dossier directory:
    ```
-   C:\Users\bari2\Desktop\dossier-y\<repo-name>\PR-<number>\
+   /home/faizan/dossier-y/<repo-name>/PR-<number>/
    ```
-   **If `C:\Users\bari2\Desktop\dossier-y\` does not exist yet, create it first.**
-   **CRITICAL**: ALL files for this entire workflow (metadata, phase outputs, payloads, verdicts) MUST live inside `C:\Users\bari2\Desktop\dossier-y\<repo-name>\PR-<number>\`. Never write to the repo root, cwd, workspace, or anywhere else. Pass this exact absolute path as `{DOSSIER_DIR}` to every subagent.
+   **If `/home/faizan/dossier-y/` does not exist yet, create it first.**
+   **CRITICAL**: ALL files for this entire workflow (metadata, phase outputs, payloads, verdicts) MUST live inside `/home/faizan/dossier-y/<repo-name>/PR-<number>/`. Never write to the repo root, cwd, workspace, or anywhere else. Pass this exact absolute path as `{DOSSIER_DIR}` to every subagent.
    If the directory already exists from a prior run, ask the user whether to overwrite or abort — never silently clobber.
 4. Get file-by-file diff stats:
    ```
@@ -127,7 +127,7 @@ Once Phase 3B confirms the review was posted, tell the user:
 - Review URL
 - Confidence score + conclusion tag
 - Total blocker findings (Critical count + High count)
-- Dossier location (`C:\Users\bari2\Desktop\dossier-y\<repo-name>\PR-<number>\`)
+- Dossier location (`/home/faizan/dossier-y/<repo-name>/PR-<number>/`)
 
 Do not re-summarize individual findings — they are already on GitHub.
 
@@ -146,7 +146,7 @@ Do not re-summarize individual findings — they are already on GitHub.
 # Subagent Prompt Templates
 
 > **CRITICAL DOSSIER DIRECTORY ENFORCEMENT**:
-> In all prompts below, `{DOSSIER_DIR}` is strictly `C:\Users\bari2\Desktop\dossier-y\<repo-name>\PR-<number>\`.
+> In all prompts below, `{DOSSIER_DIR}` is strictly `/home/faizan/dossier-y/<repo-name>/PR-<number>/`.
 > Every subagent is strictly forbidden from writing files anywhere else. All outputs, intermediate notes, payloads, and reports must strictly live inside `{DOSSIER_DIR}`.
 
 ---

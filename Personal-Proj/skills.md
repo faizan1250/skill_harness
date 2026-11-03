@@ -7,14 +7,14 @@
 **Hard rule:** The 5-Phase OSS pipeline, all `open-*` orchestrator-only skills, and the heavy 6-lens audit are **strictly forbidden** in personal projects. This skill exists precisely to enforce that boundary.
 
 **Related skills:**
-- Parent / Core: `C:/Users/bari2/Desktop/SKILLS/agent-orchestrator/skills.md` — role, tool lockdown, skill inventory
-- Sibling: `C:/Users/bari2/Desktop/SKILLS/OS-Contribution/skills.md` — OSS pipeline (mutually exclusive)
+- Parent / Core: `/home/faizan/SKILLS/agent-orchestrator/skills.md` — role, tool lockdown, skill inventory
+- Sibling: `/home/faizan/SKILLS/OS-Contribution/skills.md` — OSS pipeline (mutually exclusive)
 - General skills referenced by dispatched fixers (read from inventory only — never read here):
-  - `C:/Users/bari2/Desktop/SKILLS/frontend/skills.md`
-  - `C:/Users/bari2/Desktop/SKILLS/backend/skills.md`
-  - `C:/Users/bari2/Desktop/SKILLS/ui-ux/skills.md`
-  - `C:/Users/bari2/Desktop/SKILLS/issue-fix/skills.md`
-  - `C:/Users/bari2/Desktop/SKILLS/review/skills.md`
+  - `/home/faizan/SKILLS/frontend/skills.md`
+  - `/home/faizan/SKILLS/backend/skills.md`
+  - `/home/faizan/SKILLS/ui-ux/skills.md`
+  - `/home/faizan/SKILLS/issue-fix/skills.md`
+  - `/home/faizan/SKILLS/review/skills.md`
 
 ---
 
