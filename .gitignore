@@ -1,0 +1,29 @@
+# --- Secrets: live production credentials, never version-controlled ---
+# env/ holds real credentials (database password, AUTH_SECRET, INTERNAL_SECRET,
+# Resend/Brevo keys, Groq keys, OpenCode Zen key, Telegram bot token).
+env/
+
+
+# --- OS cruft ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Logs ---
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Local environment / secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Dependencies ---
+node_modules/
+
+# --- Editors / IDEs ---
+.idea/
+.vscode/
+*.swp
